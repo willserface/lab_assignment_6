@@ -1,8 +1,26 @@
-#include <stdio.h>
+/// Will Serface - COP3502C Lab Assignment 6
 
-int search(int numbers[], int low, int high, int value) 
-{
-	return -1;
+#include <stdio.h>
+#include <malloc.h>
+
+int search(int numbers[], int low, int high, int value) {
+    // Recursive Binary Search Algorithm
+    if (high - low <= 1) { // Base Case
+        if (numbers[low] == value) return low; // Check if lower index equals value
+        if (numbers[high] == value) return high; // Check if higher index equals value
+        return -1; // Value is not in numbers
+    } else { // Recursive Case
+        int middle = (low + high) / 2; // Find midpoint of search
+        if (numbers[middle] == value) { // Check if midpoint equals value
+            return middle; // Return index where value was found
+        } else {
+            if (numbers[middle] > value) { // Shift down
+                return search(numbers, low, middle, value);
+            } else { // Shift up
+                return search(numbers, middle, high, value);
+            }
+        }
+    }
 }
 
 void printArray(int numbers[], int sz)
